@@ -51,6 +51,18 @@ class CheckAccountInfo:
         return r.json()
 
 
+class CreateFooAccount:
+    def __init__(self):
+        self.name = "Create foo@mydomain.com account"
+
+    def run(self):
+        list_accounts_url = "{0}accounts/foo@mydomain.com/".format(self.api_url)
+        headers = dict(list(self.authorization_token.items()) + list(self.json_formatted.items()))
+        payload = {"password": "123456"}
+        r = requests.put(list_accounts_url, headers=headers, data=payload)
+        return r
+
+
 class Exit:
     def __init__(self):
         self.name = "Exit"
