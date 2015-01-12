@@ -19,10 +19,8 @@ class Menu:
             self._show()
             choosen_option = int(input("Choose an option: "))
             menu_item = next((menu_item for menu_item in self._menu_items if menu_item.index == choosen_option), None)
-            if menu_item is None:
-                return self._try_again()
             return menu_item.function
-        except ValueError:
+        except (ValueError, AttributeError):
             return self._try_again()
     
     def wait_user_interaction(self):

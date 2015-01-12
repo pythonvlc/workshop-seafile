@@ -15,9 +15,8 @@ class App:
 
     def _build_model(self):
         user, password = self._get_user_password()
-#        user, password = ("joansava@gmail.com", "sExt3rn08")
         api = Api.authenticate("http://seafileserver:8000/api2/", user, password) 
-        api.add_functions([Exit(), ListAccounts(), CheckAccountInfo(), CreateFooAccount(), DeleteFooAccount()])
+        api.add_functions([Exit(), ListAccounts(), CheckAccountInfo()])
         return api
 
     def _get_user_password(self):
