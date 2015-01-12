@@ -1,37 +1,11 @@
 import os
 
-class Gui:
-    def __init__(self, api):
-        self._api = api
-
-    def run(self):
-        self._build_api_map()
-        menu_items = self._build_menu_items()
-        self._menu = Menu("API options", menu_items)
-        while True:
-            choosen_option = self._menu.get_choosen_option()
-            self._execute(choosen_option)
-
-    def _build_api_map(self):
-        self._functions = {}
-        for i, function in enumerate(self._api.functions):
-           self._functions[i] = function
-
-    def _build_menu_items(self):
-        menu_items = []
-        [menu_items.append(MenuItem(index, function.name)) for index, function in self._functions.items()]
-        return menu_items
-
-    def _execute(self, option):
-        response = self._functions[option].run()
-        print(response)
-        self._menu.wait_user_interaction()
-
 
 class MenuItem:
-    def __init__(self, index, name):
+    def __init__(self, index, name, function):
         self.index = index
         self.name = name
+        self.function = function
 
 
 class Menu:
@@ -40,14 +14,14 @@ class Menu:
         self._menu_items = menu_items
         self._blank_line = "\n"
 
-    def get_choosen_option(self):
+    def get_choosen_action(self):
         try:
             self._show()
             choosen_option = int(input("Choose an option: "))
             menu_item = next((menu_item for menu_item in self._menu_items if menu_item.index == choosen_option), None)
             if menu_item is None:
                 return self._try_again()
-            return menu_item.index
+            return menu_item.function
         except ValueError:
             return self._try_again()
     
@@ -65,7 +39,7 @@ class Menu:
 
     def _try_again(self):
         self._mismatch_option()        
-        return self.get_choosen_option()
+        return self.get_choosen_action()
 
     def _clear_screen(self):
        os.system("clear") 
