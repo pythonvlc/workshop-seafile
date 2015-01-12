@@ -1,5 +1,6 @@
 import requests
 
+
 class Api():
     @classmethod
     def authenticate(Api, api_url, user, password):

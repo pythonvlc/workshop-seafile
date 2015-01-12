@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 
+
 import getpass
 from api import Api
 from api_functions import ListAccounts, CheckAccountInfo, Exit
 from gui import Gui
+
 
 def get_user_password():
     user = input("admin user: ")

@@ -1,6 +1,7 @@
 import sys
 import requests
 
+
 class ListAccounts:
     def __init__(self):
         self.name = "List accounts"
@@ -12,6 +13,7 @@ class ListAccounts:
         r = requests.get(list_accounts_url, headers=headers, data=payload)
         return r.json()
 
+
 class CheckAccountInfo:
     def __init__(self):
         self.name = "Check account info"
@@ -21,6 +23,7 @@ class CheckAccountInfo:
         headers = dict(list(self.authorization_token.items()) + list(self.json_formatted.items()))
         r = requests.get(check_account_info_url, headers=headers)
         return r.json()
+
 
 class Exit:
     def __init__(self):
