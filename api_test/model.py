@@ -9,7 +9,8 @@ class Api():
         payload = {"username": user, "password": password}
         r = requests.post(auth_url, data=payload)
         token = r.json()["token"]
-        return Api(api_url, token)
+        api = Api(api_url, token)
+        return api
 
     def __init__(self, api_url, token):
         self._api_url = api_url
@@ -19,9 +20,12 @@ class Api():
     def add_functions(self, functions):
         self.functions = functions
         for function in self.functions:
-            function.api_url = self._api_url
-            function.authorization_token = self._authorization_token
-            function.json_formatted = self._json_formatted
+            self._init_function(function)
+
+    def _init_function(self, function):
+        function.api_url = self._api_url
+        function.authorization_token = self._authorization_token
+        function.json_formatted = self._json_formatted
 
 
 class ListAccounts:
