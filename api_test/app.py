@@ -2,7 +2,7 @@
 
 
 import getpass
-from model import Api, ListAccounts, CheckAccountInfo, CreateFooAccount, Exit
+from model import Api, ListAccounts, CheckAccountInfo, CreateFooAccount, Exit, DeleteFooAccount
 from view import Menu, MenuItem
 from controller import Controller
 
@@ -17,7 +17,7 @@ class App:
         user, password = self._get_user_password()
 #        user, password = ("joansava@gmail.com", "sExt3rn08")
         api = Api.authenticate("http://seafileserver:8000/api2/", user, password) 
-        api.add_functions([Exit(), ListAccounts(), CheckAccountInfo(), CreateFooAccount()])
+        api.add_functions([Exit(), ListAccounts(), CheckAccountInfo(), CreateFooAccount(), DeleteFooAccount()])
         return api
 
     def _get_user_password(self):

@@ -63,6 +63,17 @@ class CreateFooAccount:
         return r
 
 
+class DeleteFooAccount:
+    def __init__(self):
+        self.name = "Delete foo@mydomain.com account"
+
+    def run(self):
+        list_accounts_url = "{0}accounts/foo@mydomain.com/".format(self.api_url)
+        headers = dict(list(self.authorization_token.items()) + list(self.json_formatted.items()))
+        r = requests.delete(list_accounts_url, headers=headers)
+        return r
+
+
 class Exit:
     def __init__(self):
         self.name = "Exit"
